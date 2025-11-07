@@ -40,15 +40,15 @@ body {
 /* Nome grande */
 .brand {
   font-weight: 800;
-  font-size: 56px; /* perfettamente centrato */
+  font-size: 46px;         /* ridotto da 56 → più equilibrato */
   line-height: 1.05;
   letter-spacing: -0.5px;
   text-decoration: none;
   color: inherit;
   display: block;
   margin: 0 0 20px;
-  padding-left: 4px; /* bilanciamento sinistra */
-  padding-right: 2px; /* bilanciamento destra */
+  padding: 0 8px;          /* margine interno uguale destra/sinistra */
+  text-align: left;        /* mantiene l’allineamento naturale */
 }
 
 /* Menu */
