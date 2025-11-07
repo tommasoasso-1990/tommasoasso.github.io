@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tommaso Asso — About</title>
+  <meta name="description" content="Bio e contatti di Tommaso Asso." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <header class="site-header wrap">
+    <a class="brand" href="index.html">Tommaso Asso</a>
+    <nav class="nav">
+      <a href="opere.html">Painting</a>
+      <a class="active" href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="wrap prose">
+    <h1 class="page-title">About</h1>
+
+    <p>Tommaso Asso è un artista contemporaneo con base a Firenze. La sua ricerca si concentra sulla materia pittorica e sulla luce come forma di linguaggio visivo. Nelle sue opere, il colore e la superficie dialogano in modo diretto, essenziale, con attenzione al gesto e alla densità.</p>
+
+    <p>Contatti:<br>
+      <a href="mailto:info@tommasoasso.com">info@tommasoasso.com</a><br>
+      Instagram: <a href="https://instagram.com/tommasoasso" target="_blank" rel="noopener">@tommasoasso</a>
+    </p>
+  </main>
+
+  <footer class="wrap site-footer">
+    © <span id="year"></span> Tommaso Asso
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
