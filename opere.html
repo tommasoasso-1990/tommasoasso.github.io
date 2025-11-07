@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tommaso Asso — Opere</title>
+  <meta name="description" content="Selezione di opere di Tommaso Asso." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <header class="site-header wrap">
+    <a class="brand" href="index.html">Tommaso Asso</a>
+    <nav class="nav">
+      <a class="active" href="opere.html">Painting</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <h1 class="page-title">Opere</h1>
+
+    <section class="grid">
+      <!-- Sostituisci con i tuoi quadri reali -->
+      <figure class="card">
+        <img src="images/01.jpg" alt="Titolo Opera — tecnica, dimensioni, anno" loading="lazy" width="1200" height="900" />
+        <figcaption class="caption"><strong>Titolo Opera</strong><span>2025</span></figcaption>
+      </figure>
+
+      <figure class="card">
+        <img src="images/02.jpg" alt="Titolo Opera — tecnica, dimensioni, anno" loading="lazy" width="1200" height="900" />
+        <figcaption class="caption"><strong>Seconda Opera</strong><span>2024</span></figcaption>
+      </figure>
+
+      <figure class="card">
+        <img src="images/03.jpg" alt="Titolo Opera — tecnica, dimensioni, anno" loading="lazy" width="1200" height="900" />
+        <figcaption class="caption"><strong>Terza Opera</strong><span>2023</span></figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <footer class="wrap site-footer">
+    © <span id="year"></span> Tommaso Asso
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
