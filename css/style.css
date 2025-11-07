@@ -24,16 +24,22 @@ body{
 
 /* Nome grande */
 .brand{
-  font-weight:800; font-size:60px;  /* entra nella colonna */
-  line-height:1.05; letter-spacing:-.5px;
-  text-decoration:none; color:inherit; display:block;
-  margin:0 0 20px;                  /* distanza dal menu */
-  padding-left:3px;                 /* allineamento ottico */
+  font-weight:800;
+  font-size:56px;                   /* perfettamente centrato */
+  line-height:1.05;
+  letter-spacing:-.5px;
+  text-decoration:none;
+  color:inherit;
+  display:block;
+  margin:0 0 20px;
+  padding-left:4px;                 /* bilanciamento sinistra */
+  padding-right:2px;                /* bilanciamento destra */
 }
 
 /* Menu */
 .nav{
-  border-top:1px solid var(--border); padding-top:8px;
+  border-top:1px solid var(--border);
+  padding-top:8px;
   display:flex; flex-direction:column; gap:2px;
 }
 .nav a{
@@ -91,7 +97,11 @@ body{
 .prose{max-width:70ch}
 .prose a{color:inherit; text-decoration:underline}
 
-/* Mobile: la sidebar diventa barra superiore */
+/* === Responsive adjustments === */
+@media (max-width:1200px){
+  .brand{font-size:48px;}   /* riduce leggermente sui portatili/tablet */
+}
+
 @media (max-width:860px){
   :root{--sidebar-w: 0px}
   body{margin:0}                      /* su mobile togli il margine esterno */
