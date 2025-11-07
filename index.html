@@ -3,34 +3,58 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tommaso Asso — Painting</title>
-  <meta name="description" content="Tommaso Asso — Painting. Portfolio opere e informazioni." />
+  <title>Tommaso Asso</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css" />
-  <meta name="color-scheme" content="light" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-  <header class="site-header wrap">
-    <a class="brand" href="index.html">Tommaso Asso</a>
-    <nav class="nav">
-      <a href="opere.html">Painting</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <a class="brand" href="index.html">Tommaso<br>Asso</a>
 
-  <main class="wrap home">
-    <h1 class="home-title">Tommaso Asso</h1>
-    <p class="home-sub">Painting · About</p>
+    <nav class="nav">
+      <a href="opere.html">Opere <span class="arr">→</span></a>
+      <a href="mostre.html">Mostre <span class="arr">→</span></a>
+      <a href="info.html">Info <span class="arr">→</span></a>
+    </nav>
+
+    <div class="lang">
+      <a class="active" href="index.html">IT</a>
+      <a href="en/index.html">EN</a>
+    </div>
+    <div class="copy">© <span id="year"></span> Tommaso Asso</div>
+  </aside>
+
+  <!-- Contenuto -->
+  <main class="content">
+    <div class="wrap hero">
+      <div class="slider" id="slider">
+        <!-- Sostituisci i file con i tuoi in /images/ -->
+        <figure class="slide active">
+          <img src="images/asso_2024_80x100.jpg" alt="Senza titolo — 80×100 cm, 2024">
+          <figcaption class="caption"><strong>Senza titolo</strong><span>80×100 · 2024</span></figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="images/citta-blu_90x70.jpg" alt="Città blu — 90×70 cm, 2024">
+          <figcaption class="caption"><strong>Città blu</strong><span>90×70 · 2024</span></figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="images/citta-del-nord_50x70.jpg" alt="Città del nord — 50×70 cm, 2024">
+          <figcaption class="caption"><strong>Città del nord</strong><span>50×70 · 2024</span></figcaption>
+        </figure>
+      </div>
+    </div>
   </main>
 
-  <footer class="wrap site-footer">
-    © <span id="year"></span> Tommaso Asso
-  </footer>
-
   <script>
+    // anno
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // slider semplice (auto-play)
+    const slides = [...document.querySelectorAll('.slide')];
+    let i = 0;
+    setInterval(()=>{ slides[i].classList.remove('active'); i = (i+1)%slides.length; slides[i].classList.add('active'); }, 3500);
   </script>
 </body>
 </html>
