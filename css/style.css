@@ -21,7 +21,7 @@ body {
   color: var(--fg);
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   line-height: 1.55;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 /* === Sidebar fissa === */
