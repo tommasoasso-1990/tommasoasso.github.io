@@ -17,10 +17,7 @@
       <a href="mostre.html">Mostre <span class="arr">→</span></a>
       <a href="info.html">Info <span class="arr">→</span></a>
     </nav>
-    <div class="lang">
-      <a class="active" href="index.html">IT</a>
-      <a href="en/index.html">EN</a>
-    </div>
+    <div class="lang"><a class="active" href="index.html">IT</a><a href="en/index.html">EN</a></div>
     <div class="copy">© <span id="year"></span> Tommaso Asso</div>
   </aside>
 
@@ -28,35 +25,32 @@
   <main class="content">
     <div class="wrap hero">
       <div class="slider" id="slider">
-        <!-- SOSTITUISCI i file con i tuoi in /images/ -->
+        <!-- Sostituisci l'ordine come vuoi -->
         <figure class="slide active">
-          <img src="images/asso_2024_80x100.jpg" alt="Senza titolo — 80×100 cm, 2024">
+          <img src="images/asso-2024-80x100.jpg" alt="Senza titolo — 80×100 cm, 2024">
           <figcaption class="caption"><strong>Senza titolo</strong><span>80×100 · 2024</span></figcaption>
         </figure>
         <figure class="slide">
-          <img src="images/citta-blu_90x70.jpg" alt="Città blu — 90×70 cm, 2024">
+          <img src="images/citta-blu-90x70.jpg" alt="Città blu — 90×70 cm, 2024">
           <figcaption class="caption"><strong>Città blu</strong><span>90×70 · 2024</span></figcaption>
         </figure>
         <figure class="slide">
-          <img src="images/citta-del-nord_50x70.jpg" alt="Città del nord — 50×70 cm, 2024">
+          <img src="images/citta-del-nord-50x70.jpg" alt="Città del nord — 50×70 cm, 2024">
           <figcaption class="caption"><strong>Città del nord</strong><span>50×70 · 2024</span></figcaption>
         </figure>
-        <!-- puoi aggiungere altre slide duplicando <figure class="slide">… -->
+        <figure class="slide">
+          <img src="images/citta-sul-fiume-100x120.jpg" alt="Città sul fiume — 100×120 cm, 2024">
+          <figcaption class="caption"><strong>Città sul fiume</strong><span>100×120 · 2024</span></figcaption>
+        </figure>
       </div>
     </div>
   </main>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // slideshow semplice
     const slides = [...document.querySelectorAll('.slide')];
     let i = 0;
-    setInterval(() => {
-      slides[i].classList.remove('active');
-      i = (i + 1) % slides.length;
-      slides[i].classList.add('active');
-    }, 3500);
+    setInterval(()=>{ slides[i].classList.remove('active'); i=(i+1)%slides.length; slides[i].classList.add('active'); }, 3500);
   </script>
 </body>
 </html>
