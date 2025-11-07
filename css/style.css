@@ -1,114 +1,35 @@
-:root{
-  --bg:#fff; --fg:#0b0b0b; --muted:#6c6c6c; --border:#eaeaea;
+:root {
+  --bg: #fff;
+  --fg: #0b0b0b;
+  --muted: #6c6c6c;
+  --border: #eaeaea;
   --sidebar-w: 320px;
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
+* {
+  box-sizing: border-box;
+}
 
-body{
-  margin: 8px 8px 0 0;              /* piccolo respiro sopra e a destra */
-  background:var(--bg); color:var(--fg);
-  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-  line-height:1.55; font-size:14px;
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 8px 8px 0 0; /* piccolo respiro sopra e a destra */
+  background: var(--bg);
+  color: var(--fg);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  line-height: 1.55;
+  font-size: 18px;
 }
 
 /* === Sidebar fissa === */
-.sidebar{
-  position:fixed; inset:0 auto 0 0; width:var(--sidebar-w);
-  border-right:1px solid var(--border);
-  padding:40px 34px 30px 34px;      /* top right bottom left */
-  display:flex; flex-direction:column; gap:26px;
-  background:var(--bg);
-}
-
-/* Nome grande */
-.brand{
-  font-weight:800;
-  font-size:56px;                   /* perfettamente centrato */
-  line-height:1.05;
-  letter-spacing:-.5px;
-  text-decoration:none;
-  color:inherit;
-  display:block;
-  margin:0 0 20px;
-  padding-left:4px;                 /* bilanciamento sinistra */
-  padding-right:2px;                /* bilanciamento destra */
-}
-
-/* Menu */
-.nav{
-  border-top:1px solid var(--border);
-  padding-top:8px;
-  display:flex; flex-direction:column; gap:2px;
-}
-.nav a{
-  display:flex; align-items:center; justify-content:space-between;
-  text-decoration:none; color:var(--fg);
-  padding:12px 0; border-bottom:1px solid var(--border);
-  font-size:18px; transition:color .2s ease;
-}
-.nav a .arr{opacity:.6; font-size:18px}
-.nav a:hover{color:var(--muted)}
-
-/* Lingue + copyright in fondo */
-.lang{
-  display:flex; justify-content:space-between; gap:8px; margin-top:auto;
-  border-top:1px solid var(--border); padding-top:12px;
-}
-.lang a{color:var(--muted); text-decoration:none; padding:6px 0; font-size:15px}
-.lang a.active, .nav a:hover{color:var(--fg)}
-.copy{color:var(--muted); font-size:.75rem; margin-top:6px; text-align:left}
-
-/* === Area contenuto === */
-.content{
-  margin-left: calc(var(--sidebar-w) + 8px); /* allineata alla sidebar + mini gap destro */
-  min-height:100vh;
-}
-.wrap{
-  max-width:1200px;
-  padding:50px 40px 30px 36px;      /* top right bottom left */
-  margin:0 auto;
-}
-
-/* Home: slideshow */
-.hero{display:grid; place-items:center; min-height:100vh}
-.slider{
-  position:relative; width:min(100%, 980px); aspect-ratio:16/9;
-  border-radius:16px; overflow:hidden; border:1px solid var(--border); background:#f8f8f8
-}
-.slide{position:absolute; inset:0; opacity:0; transition:opacity .6s ease}
-.slide.active{opacity:1}
-.slide img{width:100%; height:100%; object-fit:cover; display:block}
-.caption{
-  position:absolute; left:0; right:0; bottom:0; padding:10px 14px; color:#fff;
-  background:linear-gradient(180deg, transparent, rgba(0,0,0,.55));
-  display:flex; justify-content:space-between; font-size:.95rem
-}
-
-/* Opere: griglia */
-.page-title{font-size:26px; margin:20px 0 14px}
-.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
-.card{border:1px solid var(--border); border-radius:14px; overflow:hidden; background:#fafafa}
-.card img{width:100%; height:100%; object-fit:cover; display:block; aspect-ratio:4/3}
-.card .caption{position:static; background:none; color:#333}
-
-/* Prosa */
-.prose{max-width:70ch}
-.prose a{color:inherit; text-decoration:underline}
-
-/* === Responsive adjustments === */
-@media (max-width:1200px){
-  .brand{font-size:48px;}   /* riduce leggermente sui portatili/tablet */
-}
-
-@media (max-width:860px){
-  :root{--sidebar-w: 0px}
-  body{margin:0}                      /* su mobile togli il margine esterno */
-  .sidebar{position:static; width:100%; border-right:0; border-bottom:1px solid var(--border)}
-  .brand{font-size:34px; padding-left:0; margin-bottom:12px}
-  .lang{margin-top:0}
-  .content{margin-left:0}
-  .wrap{padding:28px 18px}
-  .hero{min-height:60vh}
-}
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar-w);
+  border-right: 1px solid var(--border);
+  padding: 40px 34px 30px 34px; /* top right bottom left */
+  display: flex;
+  flex
