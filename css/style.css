@@ -39,17 +39,18 @@ body {
 
 /* Nome grande */
 .brand {
-  font-weight: 800;
-  font-size: 46px;         /* ridotto da 56 → più equilibrato */
-  line-height: 1.05;
-  letter-spacing: -0.5px;
+  font-weight: 600;
+  font-size: 22px;          /* quasi come "Opere" */
+  line-height: 1.2;
+  letter-spacing: -0.2px;
   text-decoration: none;
   color: inherit;
   display: block;
-  margin: 0 0 20px;
-  padding: 0 8px;          /* margine interno uguale destra/sinistra */
-  text-align: left;        /* mantiene l’allineamento naturale */
+  margin: 0 0 14px;
+  padding: 0 8px;           /* margini uguali destra/sinistra */
+  text-align: left;
 }
+
 
 /* Menu */
 .nav {
