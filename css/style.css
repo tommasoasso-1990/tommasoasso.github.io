@@ -40,17 +40,16 @@ body {
 /* Nome grande */
 .brand {
   font-weight: 600;
-  font-size: 26px;          /* quasi come "Opere" */
+  font-size: 26px; /* quasi come "Opere" */
   line-height: 1.2;
   letter-spacing: -0.2px;
   text-decoration: none;
   color: inherit;
   display: block;
   margin: 0 0 14px;
-  padding: 0 8px;           /* margini uguali destra/sinistra */
+  padding: 0 8px; /* margini uguali destra/sinistra */
   text-align: left;
 }
-
 
 /* Menu */
 .nav {
@@ -123,54 +122,6 @@ body {
   margin: 0 auto;
 }
 
-/* === Home: slideshow === */
-.hero {
-  display: grid;
-  place-items: center;
-  min-height: 100vh;
-}
-
-.slider {
-  position: relative;
-  width: min(100%, 980px);
-  aspect-ratio: 16 / 9;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: #f8f8f8;
-}
-
-.slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-.slide.active {
-  opacity: 1;
-}
-
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 10px 14px;
-  color: #fff;
-  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.55));
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.95rem;
-}
-
 /* === Pagina Opere: lista verticale === */
 .page-title {
   font-size: 26px;
@@ -190,10 +141,10 @@ body {
   height: auto;
   display: block;
   object-fit: contain; /* no stretch */
-  background: #f8f8f8;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 6px;
+  background: #fff; /* sfondo bianco */
+  border: none; /* nessun bordino */
+  border-radius: 0; /* angoli netti */
+  padding: 0; /* nessun padding */
 }
 
 .work figcaption {
@@ -252,9 +203,5 @@ body {
 
   .wrap {
     padding: 28px 18px;
-  }
-
-  .hero {
-    min-height: 60vh;
   }
 }
