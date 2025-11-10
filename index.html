@@ -86,47 +86,77 @@
     </div>
   </main>
 
-  <!-- Lightbox -->
+  <!-- Lightbox con frecce -->
   <div id="lightbox" aria-hidden="true">
+    <button class="nav prev" aria-label="Precedente">‹</button>
     <span class="close" aria-label="Chiudi">×</span>
     <figure>
       <img alt="">
       <figcaption class="cap"></figcaption>
     </figure>
+    <button class="nav next" aria-label="Successiva">›</button>
   </div>
 
   <script>
     // anno footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Lightbox a tutto schermo
+    // Lightbox con navigazione
     (function(){
       const overlay = document.getElementById('lightbox');
       const bigImg  = overlay.querySelector('img');
       const cap     = overlay.querySelector('.cap');
       const close   = overlay.querySelector('.close');
+      const prevBtn = overlay.querySelector('.prev');
+      const nextBtn = overlay.querySelector('.next');
 
-      function openLightbox(src, caption){
-        bigImg.src = src;
-        cap.textContent = caption || '';
+      const cards = Array.from(document.querySelectorAll('.work'));
+      const items = cards.map(card => {
+        const img = card.querySelector('img');
+        const caption = card.querySelector('figcaption')?.innerText || '';
+        return { src: img.src, caption };
+      });
+
+      let current = 0;
+
+      function render(){
+        bigImg.src = items[current].src;
+        cap.textContent = items[current].caption || '';
+      }
+      function openAt(index){
+        current = index;
+        render();
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
       }
-      function closeLightbox(){
+      function closeLb(){
         overlay.classList.remove('open');
         document.body.style.overflow = '';
         bigImg.src = '';
       }
+      function next(){ current = (current + 1) % items.length; render(); }
+      function prev(){ current = (current - 1 + items.length) % items.length; render(); }
 
-      document.querySelectorAll('.work').forEach(card=>{
-        const img = card.querySelector('img');
-        const caption = card.querySelector('figcaption')?.innerText || '';
-        img.addEventListener('click', ()=> openLightbox(img.src, caption));
+      // click sulle immagini
+      cards.forEach((card, i) => {
+        card.querySelector('img').addEventListener('click', () => openAt(i));
       });
 
-      overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeLightbox(); });
-      close.addEventListener('click', closeLightbox);
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeLightbox(); });
+      // controlli
+      nextBtn.addEventListener('click', e => { e.stopPropagation(); next(); });
+      prevBtn.addEventListener('click', e => { e.stopPropagation(); prev(); });
+      close.addEventListener('click', closeLb);
+
+      // chiudi cliccando fuori
+      overlay.addEventListener('click', e => { if (e.target === overlay) closeLb(); });
+
+      // tastiera
+      document.addEventListener('keydown', e => {
+        if (!overlay.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLb();
+        if (e.key === 'ArrowRight') next();
+        if (e.key === 'ArrowLeft')  prev();
+      });
     })();
   </script>
 </body>
