@@ -32,7 +32,7 @@
           <figcaption><strong>2024</strong><br>80×100 cm · 2024</figcaption>
         </figure>
 
-        <!-- Città blu in evidenza -->
+        <!-- Città blu in evidenza (più larga, nessuna sovrapposizione al titolo) -->
         <figure class="work featured">
           <img src="images/città-blu-90x70.jpg" alt="Città blu — 90×70 cm, 2024" loading="lazy">
           <figcaption><strong>Città blu</strong><br>90×70 cm · 2024</figcaption>
@@ -86,7 +86,7 @@
     </div>
   </main>
 
-  <!-- Lightbox -->
+  <!-- Lightbox bianco/minimal -->
   <div id="lightbox" aria-hidden="true">
     <button class="nav prev" aria-label="Precedente">←</button>
     <span class="close" aria-label="Chiudi">×</span>
@@ -98,8 +98,10 @@
   </div>
 
   <script>
+    // anno footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Lightbox minimal bianco con frecce
     (function(){
       const overlay = document.getElementById('lightbox');
       const bigImg  = overlay.querySelector('img');
@@ -107,11 +109,14 @@
       const close   = overlay.querySelector('.close');
       const prevBtn = overlay.querySelector('.prev');
       const nextBtn = overlay.querySelector('.next');
-      const cards = Array.from(document.querySelectorAll('.work'));
-      const items = cards.map(card => ({
-        src: card.querySelector('img').src,
-        caption: card.querySelector('figcaption')?.innerText || ''
-      }));
+      const cards   = Array.from(document.querySelectorAll('.work'));
+
+      const items = cards.map(card => {
+        const img = card.querySelector('img');
+        const caption = card.querySelector('figcaption')?.innerText || '';
+        return { src: img.src, caption };
+      });
+
       let current = 0;
 
       function render(){
@@ -135,11 +140,12 @@
       close.addEventListener('click', closeLb);
       nextBtn.addEventListener('click', e=>{ e.stopPropagation(); next(); });
       prevBtn.addEventListener('click', e=>{ e.stopPropagation(); prev(); });
+
       document.addEventListener('keydown', e=>{
         if(!overlay.classList.contains('open')) return;
         if(e.key==='Escape') closeLb();
         if(e.key==='ArrowRight') next();
-        if(e.key==='ArrowLeft') prev();
+        if(e.key==='ArrowLeft')  prev();
       });
     })();
   </script>
