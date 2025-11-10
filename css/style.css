@@ -1,163 +1,69 @@
-<!doctype html>
-<html lang="it">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Opere — Tommaso Asso</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <a class="brand" href="index.html">Tommaso<br>Asso</a>
-    <nav class="nav">
-      <a href="index.html">Opere <span class="arr">→</span></a>
-      <a href="mostre.html">Mostre <span class="arr">→</span></a>
-      <a href="info.html">Info <span class="arr">→</span></a>
-    </nav>
-    <div class="lang"><a class="active" href="index.html">IT</a><a href="en/index.html">EN</a></div>
-    <div class="copy">© <span id="year"></span> Tommaso Asso</div>
-  </aside>
+/* === Lightbox bianco come una parete === */
+#lightbox {
+  position: fixed; inset: 0; z-index: 9999;
+  display: none; align-items: center; justify-content: center;
+  background: #fff;
+  padding: 60px 80px;
+  cursor: zoom-out;
+}
+#lightbox.open { display: flex; }
 
-  <!-- Contenuto -->
-  <main class="content">
-    <div class="wrap">
-      <h1 class="page-title">Opere</h1>
+#lightbox figure {
+  margin: 0;
+  text-align: center;
+}
+#lightbox img {
+  max-width: 80vw;
+  max-height: 80vh;
+  object-fit: contain;
+  box-shadow: 0 0 40px rgba(0,0,0,.08);
+}
+#lightbox .cap {
+  color: #111;
+  margin-top: 14px;
+  font-size: 1rem;
+  font-weight: 500;
+}
 
-      <section class="stack">
-        <figure class="work">
-          <img src="images/2024-80x100.jpg" alt="2024 — 80×100 cm" loading="lazy">
-          <figcaption><strong>2024</strong><br>80×100 cm · 2024</figcaption>
-        </figure>
+/* Chiudi */
+#lightbox .close {
+  position: absolute;
+  top: 20px; right: 26px;
+  color: #888;
+  font-size: 28px;
+  cursor: pointer;
+  transition: color .2s;
+}
+#lightbox .close:hover { color: #000; }
 
-        <!-- Città blu ingrandita -->
-        <figure class="work featured highlight">
-          <img src="images/città-blu-90x70.jpg" alt="Città blu — 90×70 cm, 2024" loading="lazy">
-          <figcaption><strong>Città blu</strong><br>90×70 cm · 2024</figcaption>
-        </figure>
+/* Frecce minimali */
+#lightbox .nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 40px;
+  line-height: 1;
+  opacity: 0.3;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+#lightbox .nav:hover { opacity: 0.9; }
+#lightbox .prev { left: 30px; }
+#lightbox .next { right: 30px; }
 
-        <figure class="work">
-          <img src="images/città-del-nord-50x70.jpg" alt="Città del nord — 50×70 cm, 2024" loading="lazy">
-          <figcaption><strong>Città del nord</strong><br>50×70 cm · 2024</figcaption>
-        </figure>
+@media (max-width: 860px){
+  #lightbox img { max-width: 94vw; max-height: 80vh; }
+  #lightbox .nav { font-size: 32px; }
+  #lightbox .prev { left: 10px; }
+  #lightbox .next { right: 10px; }
+}
 
-        <figure class="work">
-          <img src="images/volterra-50x70.jpg" alt="Volterra — 50×70 cm, 2024" loading="lazy">
-          <figcaption><strong>Volterra</strong><br>50×70 cm · 2024</figcaption>
-        </figure>
-
-        <figure class="work">
-          <img src="images/città-sul-fiume-100x120.jpg" alt="Città sul fiume — 100×120 cm, 2024" loading="lazy">
-          <figcaption><strong>Città sul fiume</strong><br>100×120 cm · 2024</figcaption>
-        </figure>
-
-        <figure class="work">
-          <img src="images/finestra-30x80.jpg" alt="Finestra — 30×80 cm, 2024" loading="lazy">
-          <figcaption><strong>Finestra</strong><br>30×80 cm · 2024</figcaption>
-        </figure>
-
-        <figure class="work">
-          <img src="images/la-città-lontana-50x60.jpg" alt="La città lontana — 50×60 cm, 2024" loading="lazy">
-          <figcaption><strong>La città lontana</strong><br>50×60 cm · 2024</figcaption>
-        </figure>
-
-        <figure class="work">
-          <img src="images/il-fumatore-70x50.jpg" alt="Il fumatore — 70×50 cm, 2023" loading="lazy">
-          <figcaption><strong>Il fumatore</strong><br>70×50 cm · 2023</figcaption>
-        </figure>
-
-        <figure class="work">
-          <img src="images/pianista-con-gallo-70x50.jpg" alt="Pianista con gallo — 70×50 cm, 2023" loading="lazy">
-          <figcaption><strong>Pianista con gallo</strong><br>70×50 cm · 2023</figcaption>
-        </figure>
-
-        <figure class="work">
-          <img src="images/portico-30x25.jpg" alt="Portico — 30×25 cm, 2023" loading="lazy">
-          <figcaption><strong>Portico</strong><br>30×25 cm · 2023</figcaption>
-        </figure>
-
-        <figure class="work">
-          <img src="images/ricordo-di-una-città-30x25.jpg" alt="Ricordo di una città — 30×25 cm, 2023" loading="lazy">
-          <figcaption><strong>Ricordo di una città</strong><br>30×25 cm · 2023</figcaption>
-        </figure>
-      </section>
-    </div>
-  </main>
-
-  <!-- Lightbox con frecce -->
-  <div id="lightbox" aria-hidden="true">
-    <button class="nav prev" aria-label="Precedente">‹</button>
-    <span class="close" aria-label="Chiudi">×</span>
-    <figure>
-      <img alt="">
-      <figcaption class="cap"></figcaption>
-    </figure>
-    <button class="nav next" aria-label="Successiva">›</button>
-  </div>
-
-  <script>
-    // anno footer
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Lightbox con navigazione
-    (function(){
-      const overlay = document.getElementById('lightbox');
-      const bigImg  = overlay.querySelector('img');
-      const cap     = overlay.querySelector('.cap');
-      const close   = overlay.querySelector('.close');
-      const prevBtn = overlay.querySelector('.prev');
-      const nextBtn = overlay.querySelector('.next');
-
-      const cards = Array.from(document.querySelectorAll('.work'));
-      const items = cards.map(card => {
-        const img = card.querySelector('img');
-        const caption = card.querySelector('figcaption')?.innerText || '';
-        return { src: img.src, caption };
-      });
-
-      let current = 0;
-
-      function render(){
-        bigImg.src = items[current].src;
-        cap.textContent = items[current].caption || '';
-      }
-      function openAt(index){
-        current = index;
-        render();
-        overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-      function closeLb(){
-        overlay.classList.remove('open');
-        document.body.style.overflow = '';
-        bigImg.src = '';
-      }
-      function next(){ current = (current + 1) % items.length; render(); }
-      function prev(){ current = (current - 1 + items.length) % items.length; render(); }
-
-      // click sulle immagini
-      cards.forEach((card, i) => {
-        card.querySelector('img').addEventListener('click', () => openAt(i));
-      });
-
-      // controlli
-      nextBtn.addEventListener('click', e => { e.stopPropagation(); next(); });
-      prevBtn.addEventListener('click', e => { e.stopPropagation(); prev(); });
-      close.addEventListener('click', closeLb);
-
-      // chiudi cliccando fuori
-      overlay.addEventListener('click', e => { if (e.target === overlay) closeLb(); });
-
-      // tastiera
-      document.addEventListener('keydown', e => {
-        if (!overlay.classList.contains('open')) return;
-        if (e.key === 'Escape') closeLb();
-        if (e.key === 'ArrowRight') next();
-        if (e.key === 'ArrowLeft')  prev();
-      });
-    })();
-  </script>
-</body>
-</html>
+/* Migliora margine figcaption */
+.work figcaption {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #333;
+}
