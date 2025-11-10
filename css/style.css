@@ -120,3 +120,33 @@ body{
   #lightbox .nav{font-size:28px}
   #lightbox .prev{left:12px} .next{right:12px}
 }
+/* === Tipografia elegante === */
+:root{
+  --sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  --serif: "Cormorant Garamond", Georgia, serif;
+}
+body{ font-family: var(--sans); }
+.brand{ font-family: var(--sans); letter-spacing: -0.2px; }
+.page-title{
+  font-family: var(--serif);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  /* allineo a destra come il blocco dei quadri */
+  display: block;
+  text-align: right;
+  margin-left: auto;
+}
+
+/* Ombra leggerissima ai quadri (effetto “staccato”) */
+.work img{
+  box-shadow: 0 6px 18px rgba(0,0,0,.04);
+}
+.work:hover img{
+  box-shadow: 0 10px 28px rgba(0,0,0,.06);
+}
+
+/* opzionale: titolo opera (nome in serif leggero) */
+.work figcaption strong{
+  font-family: var(--serif);
+  font-weight: 600;
+}
