@@ -3,7 +3,7 @@
   --fg:#0b0b0b;
   --muted:#7a7a7a;
   --border:#eee;
-  --accent:#b02b2b;     /* rosso gallo */
+  --accent:#b02b2b;
   --sidebar-w:320px;
 }
 
@@ -17,90 +17,61 @@ body{
   font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   line-height:1.55;
   font-size:17px;
-  /* cursore gallo (attivalo quando carichi l'immagine):
-  cursor:url("../images/gallo-cursor.png") 10 10, auto;
-  */
 }
 
-/* ===== Sidebar ===== */
+/* === Sidebar === */
 .sidebar{
   position:fixed; inset:0 auto 0 0; width:var(--sidebar-w);
   border-right:2px solid var(--accent);
   padding:40px 34px 30px;
   display:flex; flex-direction:column; gap:26px; background:var(--bg);
 }
-.brand{
-  font-weight:600; font-size:26px; line-height:1.2; letter-spacing:-.2px;
-  text-decoration:none; color:inherit; display:block; margin:0 0 14px;
-}
-.nav{border-top:1px solid var(--border); padding-top:8px; display:flex; flex-direction:column; gap:4px}
-.nav a{
-  display:flex; align-items:center; justify-content:space-between;
-  text-decoration:none; color:var(--fg); padding:12px 0; border-bottom:1px solid var(--border);
-  font-size:18px; transition:color .3s ease, transform .2s ease;
-}
-.nav a:hover{color:var(--accent); transform:translateX(4px)}
-.lang{display:flex; justify-content:space-between; margin-top:auto; border-top:1px solid var(--border); padding-top:10px}
-.lang a{color:var(--muted); text-decoration:none; font-size:15px}
+.brand{font-weight:600;font-size:26px;line-height:1.2;letter-spacing:-.2px;text-decoration:none;color:inherit;display:block;margin:0 0 14px}
+.nav{border-top:1px solid var(--border);padding-top:8px;display:flex;flex-direction:column;gap:4px}
+.nav a{display:flex;align-items:center;justify-content:space-between;text-decoration:none;color:var(--fg);padding:12px 0;border-bottom:1px solid var(--border);font-size:18px;transition:color .3s ease,transform .2s ease}
+.nav a:hover{color:var(--accent);transform:translateX(4px)}
+.lang{display:flex;justify-content:space-between;margin-top:auto;border-top:1px solid var(--border);padding-top:10px}
+.lang a{color:var(--muted);text-decoration:none;font-size:15px}
 .lang a.active,.nav a:hover{color:var(--fg)}
-.copy{color:var(--muted); font-size:.75rem; margin-top:6px}
+.copy{color:var(--muted);font-size:.75rem;margin-top:6px}
 
-/* ===== Contenuto ===== */
-.content{
-  margin-left:var(--sidebar-w); min-height:100vh;
-  background:linear-gradient(180deg,#fff 0%, #fff8f8 100%);
-}
-.wrap{max-width:1200px; padding:60px 40px; margin:0 auto}
+/* === Contenuto === */
+.content{margin-left:var(--sidebar-w);min-height:100vh;background:linear-gradient(180deg,#fff 0%,#fff8f8 100%)}
+.wrap{max-width:1200px;padding:60px 40px;margin:0 auto}
+.page-title{font-size:26px;margin:0 0 30px;border-bottom:2px solid var(--accent);display:inline-block;padding-bottom:4px}
 
-/* Titolo + linea rossa */
-.page-title{
-  font-size:26px; margin:0 0 30px;
-  border-bottom:2px solid var(--accent); display:inline-block; padding-bottom:4px;
-}
+/* === Griglia opere === */
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:36px}
+.work{transition:transform .3s ease,filter .3s ease}
+.work:hover{transform:translateY(-4px);filter:brightness(1.05)}
+.work img{width:100%;height:auto;display:block;object-fit:contain;background:none;border:none;border-radius:0;padding:0;cursor:zoom-in}
+.work figcaption{margin-top:8px;font-size:.95rem;color:#444;line-height:1.4}
 
-/* ===== Griglia Opere ===== */
-.stack{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); /* più grandi */
-  gap:36px;
-}
-.work{transition:transform .3s ease, filter .3s ease}
-.work:hover{transform:translateY(-4px); filter:brightness(1.04)}
-.work img{
-  width:100%; height:auto; display:block; object-fit:contain;
-  background:none; border:none; border-radius:0; padding:0; cursor:zoom-in;
-}
-.work figcaption{margin-top:8px; font-size:.95rem; color:#444; line-height:1.4}
-
-/* Evidenzia un'opera (2 colonne) */
+/* Città blu più grande e con impatto */
 .work.featured{grid-column:span 2}
-@media (max-width:900px){ .work.featured{grid-column:span 1} }
+.work.highlight img{transform:scale(1.1);transition:transform .4s ease}
+.work.highlight:hover img{transform:scale(1.15)}
+@media (max-width:900px){.work.featured{grid-column:span 1}}
 
-/* ===== Prosa (Mostre/Info) ===== */
-.prose{max-width:70ch}
-.prose a{color:var(--accent)}
-
-/* ===== Lightbox ===== */
+/* === Lightbox a tutto schermo === */
 #lightbox{
-  position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.9);
-  display:none; align-items:center; justify-content:center; padding:24px; cursor:zoom-out;
+  position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,1);
+  display:none; align-items:center; justify-content:center;
+  cursor:zoom-out; overflow:auto;
 }
 #lightbox.open{display:flex}
-#lightbox figure{margin:0; text-align:center}
-#lightbox img{
-  max-width:95vw; max-height:92vh; width:auto; height:auto; display:block;
-  box-shadow:0 10px 40px rgba(0,0,0,.5);
-}
-#lightbox .cap{color:#fff; margin-top:10px; font-size:.95rem}
+#lightbox figure{margin:0; text-align:center;}
+#lightbox img{width:100%;height:100vh;object-fit:contain;}
+#lightbox .cap{color:#fff;margin-top:10px;font-size:1rem}
 #lightbox .close{
-  position:absolute; top:14px; right:20px; color:#fff;
-  font-size:28px; line-height:1; cursor:pointer; user-select:none;
+  position:absolute;top:14px;right:20px;color:#fff;font-size:28px;
+  line-height:1;cursor:pointer;user-select:none;
 }
 
-/* ===== Mobile ===== */
+/* === Mobile === */
 @media (max-width:860px){
   :root{--sidebar-w:0}
-  .sidebar{position:static; width:100%; border-right:0; border-bottom:2px solid var(--accent)}
+  .sidebar{position:static;width:100%;border-right:0;border-bottom:2px solid var(--accent)}
   .brand{font-size:22px}
   .content{margin-left:0}
   .wrap{padding:30px 20px}
