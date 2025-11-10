@@ -1,69 +1,122 @@
-/* === Lightbox bianco come una parete === */
-#lightbox {
-  position: fixed; inset: 0; z-index: 9999;
-  display: none; align-items: center; justify-content: center;
-  background: #fff;
-  padding: 60px 80px;
-  cursor: zoom-out;
-}
-#lightbox.open { display: flex; }
-
-#lightbox figure {
-  margin: 0;
-  text-align: center;
-}
-#lightbox img {
-  max-width: 80vw;
-  max-height: 80vh;
-  object-fit: contain;
-  box-shadow: 0 0 40px rgba(0,0,0,.08);
-}
-#lightbox .cap {
-  color: #111;
-  margin-top: 14px;
-  font-size: 1rem;
-  font-weight: 500;
+:root{
+  --bg:#fff;
+  --fg:#0b0b0b;
+  --muted:#7a7a7a;
+  --border:#eee;
+  --accent:#b02b2b;      /* linea rossa sidebar */
+  --sidebar-w:320px;
 }
 
-/* Chiudi */
-#lightbox .close {
-  position: absolute;
-  top: 20px; right: 26px;
-  color: #888;
-  font-size: 28px;
-  cursor: pointer;
-  transition: color .2s;
-}
-#lightbox .close:hover { color: #000; }
+*{box-sizing:border-box}
+html,body{height:100%;scroll-behavior:smooth}
 
-/* Frecce minimali */
-#lightbox .nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #333;
-  font-size: 40px;
-  line-height: 1;
-  opacity: 0.3;
-  cursor: pointer;
-  transition: opacity .2s;
-}
-#lightbox .nav:hover { opacity: 0.9; }
-#lightbox .prev { left: 30px; }
-#lightbox .next { right: 30px; }
-
-@media (max-width: 860px){
-  #lightbox img { max-width: 94vw; max-height: 80vh; }
-  #lightbox .nav { font-size: 32px; }
-  #lightbox .prev { left: 10px; }
-  #lightbox .next { right: 10px; }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  line-height:1.55;
+  font-size:17px;
 }
 
-/* Migliora margine figcaption */
-.work figcaption {
-  margin-top: 10px;
-  font-size: 0.95rem;
-  color: #333;
+/* ===== Sidebar ===== */
+.sidebar{
+  position:fixed; inset:0 auto 0 0; width:var(--sidebar-w);
+  border-right:2px solid var(--accent);
+  padding:40px 34px 30px;
+  display:flex; flex-direction:column; gap:26px; background:var(--bg);
+}
+.brand{
+  font-weight:600; font-size:26px; line-height:1.2; letter-spacing:-.2px;
+  text-decoration:none; color:inherit; display:block; margin:0 0 14px;
+}
+.nav{border-top:1px solid var(--border); padding-top:8px; display:flex; flex-direction:column; gap:4px}
+.nav a{
+  display:flex; align-items:center; justify-content:space-between;
+  text-decoration:none; color:var(--fg); padding:12px 0; border-bottom:1px solid var(--border);
+  font-size:18px; transition:color .3s ease, transform .2s ease;
+}
+.nav a:hover{color:var(--accent); transform:translateX(4px)}
+.lang{display:flex; justify-content:space-between; margin-top:auto; border-top:1px solid var(--border); padding-top:10px}
+.lang a{color:var(--muted); text-decoration:none; font-size:15px}
+.lang a.active,.nav a:hover{color:var(--fg)}
+.copy{color:var(--muted); font-size:.75rem; margin-top:6px}
+
+/* ===== Contenuto ===== */
+.content{
+  margin-left:var(--sidebar-w); min-height:100vh;
+  background:linear-gradient(180deg,#fff 0%,#fff8f8 100%);
+}
+.wrap{max-width:1200px; padding:60px 40px; margin:0 auto}
+.page-title{
+  font-size:26px; margin:0 0 30px; border-bottom:2px solid var(--accent);
+  display:inline-block; padding-bottom:4px;
+}
+
+/* ===== Griglia opere ===== */
+.stack{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+  gap:36px;
+}
+.work{transition:transform .3s ease, filter .3s ease}
+.work:hover{transform:translateY(-4px); filter:brightness(1.05)}
+.work img{
+  width:100%; height:auto; display:block; object-fit:contain;
+  background:none; border:none; border-radius:0; padding:0; cursor:zoom-in;
+}
+.work figcaption{
+  margin-top:12px;            /* più spazio = nessuna sovrapposizione */
+  font-size:.95rem; color:#333; line-height:1.4;
+}
+/* evidenzia un’opera: più larga (2 colonne) */
+.work.featured{grid-column:span 2}
+@media (max-width:900px){ .work.featured{grid-column:span 1} }
+
+/* ===== Lightbox bianco/minimal ===== */
+#lightbox{
+  position:fixed; inset:0; z-index:9999;
+  display:none;                        /* importante: nascosto di default */
+  align-items:center; justify-content:center;
+  background:#fff;                     /* parete bianca */
+  padding:60px 80px;
+  cursor:zoom-out;
+}
+#lightbox.open{display:flex}
+
+#lightbox figure{margin:0; text-align:center}
+#lightbox img{
+  max-width:80vw; max-height:80vh; object-fit:contain;
+  background:#fff; box-shadow:0 0 40px rgba(0,0,0,.08);
+}
+#lightbox .cap{
+  color:#111; margin-top:14px; font-size:1rem; font-weight:500;
+}
+
+/* chiudi */
+#lightbox .close{
+  position:absolute; top:20px; right:26px; color:#888;
+  font-size:28px; cursor:pointer; transition:color .2s;
+}
+#lightbox .close:hover{color:#000}
+
+/* frecce minimali */
+#lightbox .nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:none; border:none; color:#333; font-size:36px; line-height:1;
+  opacity:.35; cursor:pointer; transition:opacity .2s;
+}
+#lightbox .nav:hover{opacity:.9}
+#lightbox .prev{left:30px}
+#lightbox .next{right:30px}
+
+@media (max-width:860px){
+  :root{--sidebar-w:0}
+  .sidebar{position:static; width:100%; border-right:0; border-bottom:2px solid var(--accent)}
+  .brand{font-size:22px}
+  .content{margin-left:0}
+  .wrap{padding:30px 20px}
+  #lightbox img{max-width:94vw; max-height:80vh}
+  #lightbox .nav{font-size:28px}
+  #lightbox .prev{left:12px} .next{right:12px}
 }
