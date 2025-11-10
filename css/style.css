@@ -1,63 +1,56 @@
 :root {
   --bg: #fff;
   --fg: #0b0b0b;
-  --muted: #6c6c6c;
-  --border: #eaeaea;
+  --muted: #7a7a7a;
+  --border: #eee;
+  --accent: #b02b2b;   /* rosso gallo */
   --sidebar-w: 320px;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html,
-body {
-  height: 100%;
-}
+html, body { height: 100%; scroll-behavior: smooth; }
 
 body {
-  margin: 8px 8px 0 0; /* piccolo respiro sopra e a destra */
+  margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   line-height: 1.55;
-  font-size: 10px;
+  font-size: 17px;
+  cursor: url("../images/gallo-cursor.png") 10 10, auto; /* cursore gallo */
 }
 
-/* === Sidebar fissa === */
+/* === Sidebar === */
 .sidebar {
   position: fixed;
   inset: 0 auto 0 0;
   width: var(--sidebar-w);
-  border-right: 1px solid var(--border);
-  padding: 40px 34px 30px 34px; /* top right bottom left */
+  border-right: 2px solid var(--accent);
+  padding: 40px 34px 30px;
   display: flex;
   flex-direction: column;
   gap: 26px;
   background: var(--bg);
 }
 
-/* Nome grande */
 .brand {
   font-weight: 600;
-  font-size: 26px; /* quasi come "Opere" */
+  font-size: 26px;
   line-height: 1.2;
   letter-spacing: -0.2px;
   text-decoration: none;
   color: inherit;
   display: block;
   margin: 0 0 14px;
-  padding: 0 8px; /* margini uguali destra/sinistra */
-  text-align: left;
 }
 
-/* Menu */
 .nav {
   border-top: 1px solid var(--border);
   padding-top: 8px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .nav a {
@@ -69,82 +62,82 @@ body {
   padding: 12px 0;
   border-bottom: 1px solid var(--border);
   font-size: 18px;
-  transition: color 0.2s ease;
-}
-
-.nav a .arr {
-  opacity: 0.6;
-  font-size: 18px;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .nav a:hover {
-  color: var(--muted);
+  color: var(--accent);
+  transform: translateX(4px);
 }
 
-/* Lingue + copyright in fondo */
 .lang {
   display: flex;
   justify-content: space-between;
-  gap: 8px;
   margin-top: auto;
   border-top: 1px solid var(--border);
-  padding-top: 12px;
+  padding-top: 10px;
 }
 
 .lang a {
   color: var(--muted);
   text-decoration: none;
-  padding: 6px 0;
   font-size: 15px;
 }
 
 .lang a.active,
-.nav a:hover {
-  color: var(--fg);
-}
+.nav a:hover { color: var(--fg); }
 
 .copy {
   color: var(--muted);
   font-size: 0.75rem;
   margin-top: 6px;
-  text-align: left;
 }
 
-/* === Area contenuto === */
+/* === Contenuto === */
 .content {
-  margin-left: calc(var(--sidebar-w) + 8px); /* allineata alla sidebar + mini gap destro */
+  margin-left: var(--sidebar-w);
   min-height: 100vh;
+  background: linear-gradient(180deg, #fff 0%, #fff8f8 100%);
 }
 
 .wrap {
   max-width: 1200px;
-  padding: 50px 40px 30px 36px; /* top right bottom left */
+  padding: 60px 40px;
   margin: 0 auto;
 }
 
-/* === Pagina Opere: lista verticale === */
+/* === Titoli e griglia === */
 .page-title {
   font-size: 26px;
-  margin: 20px 0 24px;
+  margin: 0 0 30px;
+  border-bottom: 2px solid var(--accent);
+  display: inline-block;
+  padding-bottom: 4px;
 }
 
+/* griglia delle opere */
 .stack {
-  max-width: 980px; /* larghezza di lettura piacevole */
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 36px; /* spazio tra le opere */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 36px;
+}
+
+.work {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.work:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.04);
 }
 
 .work img {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: contain; /* no stretch */
-  background: #fff; /* sfondo bianco */
-  border: none; /* nessun bordino */
-  border-radius: 0; /* angoli netti */
-  padding: 0; /* nessun padding */
+  object-fit: contain;
+  background: none;
+  border: none;
 }
 
 .work figcaption {
@@ -154,54 +147,20 @@ body {
   line-height: 1.4;
 }
 
-/* === Prosa / testi === */
-.prose {
-  max-width: 70ch;
-}
+/* testo */
+.prose { max-width: 70ch; }
+.prose a { color: var(--accent); }
 
-.prose a {
-  color: inherit;
-  text-decoration: underline;
-}
-
-/* === Responsive adjustments === */
-@media (max-width: 1200px) {
-  .brand {
-    font-size: 48px;
-  }
-}
-
+/* === Mobile === */
 @media (max-width: 860px) {
-  :root {
-    --sidebar-w: 0px;
-  }
-
-  body {
-    margin: 0;
-  }
-
+  :root { --sidebar-w: 0; }
   .sidebar {
     position: static;
     width: 100%;
     border-right: 0;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid var(--accent);
   }
-
-  .brand {
-    font-size: 34px;
-    padding-left: 0;
-    margin-bottom: 12px;
-  }
-
-  .lang {
-    margin-top: 0;
-  }
-
-  .content {
-    margin-left: 0;
-  }
-
-  .wrap {
-    padding: 28px 18px;
-  }
+  .brand { font-size: 22px; }
+  .content { margin-left: 0; }
+  .wrap { padding: 30px 20px; }
 }
