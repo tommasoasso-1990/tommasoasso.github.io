@@ -16,7 +16,6 @@
       <a href="info.html">Info <span class="arr">→</span></a>
     </nav>
     <div class="lang"><a href="../index.html">IT</a><a class="active" href="index.html">EN</a></div>
-    <div class="copy">© <span id="year"></span> Tommaso Asso</div>
   </aside>
 
   <main class="content">
@@ -92,6 +91,8 @@
     <button class="nav next" aria-label="Next">→</button>
   </div>
 
+  <footer class="site-footer">© <span id="year"></span> Tommaso Asso</footer>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     (function(){
@@ -99,9 +100,10 @@
       const bigImg=overlay.querySelector('img');
       const cap=overlay.querySelector('.cap');
       const close=overlay.querySelector('.close');
-      const prevBtn=overlay.querySelector('.prev');
-      const nextBtn=overlay.querySelector('.next');
+      const prevBtn=overlay.querySelector('class="prev"');
       const cards=Array.from(document.querySelectorAll('.work'));
+      const nextBtn=document.querySelector('#lightbox .next');
+      const prevButton=document.querySelector('#lightbox .prev');
       const items=cards.map(c=>({src:c.querySelector('img').src,caption:c.querySelector('figcaption').innerText}));
       let current=0;
       function render(){bigImg.src=items[current].src; cap.textContent=items[current].caption;}
@@ -111,9 +113,9 @@
       function prev(){current=(current-1+items.length)%items.length; render();}
       cards.forEach((c,i)=>c.querySelector('img').addEventListener('click',()=>openAt(i)));
       overlay.addEventListener('click',e=>{if(e.target===overlay)closeLb();});
-      close.addEventListener('click',closeLb);
+      document.querySelector('#lightbox .close').addEventListener('click',closeLb);
       nextBtn.addEventListener('click',e=>{e.stopPropagation();next();});
-      prevBtn.addEventListener('click',e=>{e.stopPropagation();prev();});
+      prevButton.addEventListener('click',e=>{e.stopPropagation();prev();});
       document.addEventListener('keydown',e=>{if(!overlay.classList.contains('open'))return;
         if(e.key==='Escape')closeLb();
         if(e.key==='ArrowRight')next();
