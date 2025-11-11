@@ -25,39 +25,48 @@ body{
 .sidebar{
   position:fixed; inset:0 auto 0 0; width:var(--sidebar-w);
   border-right:2px solid var(--accent);
-  padding:40px 34px 30px;
-  display:flex; flex-direction:column; gap:26px; background:var(--bg);
+  padding:34px 28px 22px;
+  display:flex; flex-direction:column; gap:18px; background:var(--bg);
 }
-.brand{font-weight:600; font-size:26px; line-height:1.2; letter-spacing:-.2px; text-decoration:none; color:inherit; display:block; margin:0 0 14px}
-.nav{border-top:1px solid var(--border); padding-top:8px; display:flex; flex-direction:column; gap:4px}
-.nav a{display:flex; align-items:center; justify-content:space-between; text-decoration:none; color:var(--fg); padding:12px 0; border-bottom:1px solid var(--border); font-size:18px; transition:color .3s ease, transform .2s ease}
-.nav a:hover{color:var(--accent); transform:translateX(4px)}
-.lang{display:flex; justify-content:space-between; margin-top:auto; border-top:1px solid var(--border); padding-top:10px}
-.lang a{color:var(--muted); text-decoration:none; font-size:15px}
+.brand{
+  font-weight:600; font-size:24px; line-height:1.1; letter-spacing:-.2px;
+  text-decoration:none; color:inherit; display:block; margin:0 0 8px;
+}
+
+/* menu più piccolo e ravvicinato */
+.nav{
+  border-top:1px solid var(--border); padding-top:6px; display:flex; flex-direction:column; gap:0;
+}
+.nav a{
+  display:flex; align-items:center; justify-content:space-between;
+  text-decoration:none; color:var(--fg);
+  padding:8px 0; border-bottom:1px solid var(--border);
+  font-size:16px; transition:color .25s ease, transform .15s ease;
+}
+.nav a:hover{color:var(--accent); transform:translateX(3px)}
+
+.lang{
+  display:flex; gap:10px; margin-top:auto;
+  border-top:1px solid var(--border); padding-top:8px;
+}
+.lang a{color:var(--muted); text-decoration:none; font-size:14px}
 .lang a.active,.nav a:hover{color:var(--fg)}
-.copy{color:var(--muted); font-size:.75rem; margin-top:6px}
 
 /* ===== Contenuto ===== */
 .content{margin-left:var(--sidebar-w); min-height:100vh; background:linear-gradient(180deg,#fff 0%,#fff8f8 100%)}
-.wrap{max-width:1200px; padding:60px 40px; margin:0 auto}
+.wrap{max-width:1200px; padding:56px 36px; margin:0 auto}
+
+/* Titolo pagina elegante allineato a dx */
 .page-title{
-  font-family:var(--serif);
-  font-weight:600;
-  font-size:30px;
-  letter-spacing:0.3px;
-  border-bottom:2px solid var(--accent);
-  padding-bottom:4px;
-  display:block;
-  text-align:right;
-  margin-left:auto;
-  width:fit-content;
-  margin-bottom:30px;
+  font-family:var(--serif); font-weight:600; font-size:28px; letter-spacing:.3px;
+  border-bottom:2px solid var(--accent); padding-bottom:4px;
+  display:block; text-align:right; width:fit-content; margin-left:auto; margin-bottom:28px;
 }
 
 /* ===== Griglia opere ===== */
-.stack{display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:36px}
+.stack{display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:32px}
 .work{transition:transform .3s ease, filter .3s ease}
-.work:hover{transform:translateY(-4px); filter:brightness(1.05)}
+.work:hover{transform:translateY(-3px); filter:brightness(1.04)}
 .work img{
   width:100%; height:auto; display:block; object-fit:contain;
   background:none; border:none; border-radius:0; padding:0; cursor:zoom-in;
@@ -65,37 +74,24 @@ body{
 }
 .work:hover img{box-shadow:0 10px 28px rgba(0,0,0,.06)}
 
-.work figcaption{
-  margin-top:10px; line-height:1.4;
-}
+.work figcaption{margin-top:10px; line-height:1.4}
 .work figcaption strong{
-  font-family:var(--serif);
-  font-weight:600;
-  font-size:1.05rem;
-  letter-spacing:0.2px;
+  font-family:var(--serif); font-weight:600; font-size:1.05rem; letter-spacing:.2px;
 }
 .work figcaption .meta{
-  display:inline-block;
-  margin-top:2px;
-  font-size:0.85rem;
-  color:#666;
-  font-family:var(--serif);
-  letter-spacing:0.1px;
-  font-weight:500;
+  display:inline-block; margin-top:2px; font-size:.85rem; color:#666;
+  font-family:var(--serif); letter-spacing:.1px; font-weight:500;
 }
 
-/* Opere in evidenza più grandi */
+/* Opere in evidenza più larghe */
 .work.featured{grid-column:span 2}
 @media (max-width:900px){ .work.featured{grid-column:span 1} }
 
-/* ===== Lightbox ===== */
+/* ===== Lightbox bianco/minimal ===== */
 #lightbox{
   position:fixed; inset:0; z-index:9999;
-  display:none;
-  align-items:center; justify-content:center;
-  background:#fff;
-  padding:60px 80px;
-  cursor:zoom-out;
+  display:none; align-items:center; justify-content:center;
+  background:#fff; padding:60px 80px; cursor:zoom-out;
 }
 #lightbox.open{display:flex}
 #lightbox figure{margin:0; text-align:center}
@@ -105,25 +101,31 @@ body{
 }
 #lightbox .cap{color:#111; margin-top:14px; font-size:1rem; font-weight:500}
 #lightbox .close{
-  position:absolute; top:20px; right:26px; color:#888; font-size:28px;
-  cursor:pointer; transition:color .2s;
+  position:absolute; top:20px; right:26px; color:#888; font-size:28px; cursor:pointer; transition:color .2s;
 }
 #lightbox .close:hover{color:#000}
 #lightbox .nav{
   position:absolute; top:50%; transform:translateY(-50%);
-  background:none; border:none; color:#333; font-size:36px; line-height:1;
+  background:none; border:none; color:#333; font-size:32px; line-height:1;
   opacity:.35; cursor:pointer; transition:opacity .2s;
 }
 #lightbox .nav:hover{opacity:.9}
-#lightbox .prev{left:30px} .next{right:30px}
+#lightbox .prev{left:24px} .next{right:24px}
+
+/* ===== Footer ===== */
+.site-footer{
+  border-top:1px solid var(--border);
+  text-align:center; padding:14px 16px; color:var(--muted); font-size:.8rem;
+}
 
 /* ===== Responsive ===== */
 @media (max-width:860px){
   :root{--sidebar-w:0}
   .sidebar{position:static; width:100%; border-right:0; border-bottom:2px solid var(--accent)}
-  .brand{font-size:22px}
+  .brand{font-size:20px}
   .content{margin-left:0}
-  .wrap{padding:30px 20px}
+  .wrap{padding:28px 18px}
+  .page-title{font-size:24px}
   #lightbox img{max-width:94vw; max-height:80vh}
   #lightbox .nav{font-size:28px}
   #lightbox .prev{left:12px} .next{right:12px}
