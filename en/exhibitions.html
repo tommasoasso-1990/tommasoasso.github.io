@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+
   <aside class="sidebar">
     <a class="brand" href="index.html">Tommaso<br>Asso</a>
     <nav class="nav">
@@ -14,15 +15,21 @@
       <a href="exhibitions.html">Exhibitions</a>
       <a href="info.html">Info</a>
     </nav>
-    <div class="lang"><a href="../mostre.html">IT</a><a class="active" href="exhibitions.html">EN</a></div>
+    <div class="lang">
+      <a href="../mostre.html">IT</a>
+      <a class="active" href="exhibitions.html">EN</a>
+    </div>
+    <div class="site-footer">© <span id="year-ex-en"></span> Tommaso Asso</div>
   </aside>
 
   <main class="content">
     <div class="wrap">
       <h1 class="page-title">Exhibitions</h1>
+
       <article class="prose">
         <p><em>Section coming soon.</em></p>
-        <h3>Selection</h3>
+
+        <h3>Selected exhibitions</h3>
         <ul>
           <li><strong>2025</strong> — Exhibition title, Venue, City</li>
           <li><strong>2024</strong> — Exhibition title, Venue, City</li>
@@ -32,7 +39,7 @@
     </div>
   </main>
 
-  <footer class="site-footer">© <span id="year"></span> Tommaso Asso</footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>document.getElementById('year-ex-en').textContent = new Date().getFullYear();</script>
+
 </body>
 </html>
