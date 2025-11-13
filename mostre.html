@@ -14,7 +14,11 @@
       <a href="mostre.html">Mostre</a>
       <a href="info.html">Info</a>
     </nav>
-    <div class="lang"><a class="active" href="mostre.html">IT</a><a href="en/exhibitions.html">EN</a></div>
+    <div class="lang">
+      <a class="active" href="mostre.html">IT</a>
+      <a href="en/exhibitions.html">EN</a>
+    </div>
+    <div class="site-footer">© <span id="year-mostre"></span> Tommaso Asso</div>
   </aside>
 
   <main class="content">
@@ -32,7 +36,6 @@
     </div>
   </main>
 
-  <footer class="site-footer">© <span id="year"></span> Tommaso Asso</footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>document.getElementById('year-mostre').textContent = new Date().getFullYear();</script>
 </body>
 </html>
