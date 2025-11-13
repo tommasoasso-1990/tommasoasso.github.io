@@ -37,28 +37,24 @@
   --fg: #0b0b0b;
   --muted: #6c6c6c;
   --border: #eaeaea;
-  --sidebar-w: 320px;
+  --sidebar-w: 300px;
 }
 
-/* === Reset base === */
-* {
-  box-sizing: border-box;
-}
+/* === Reset === */
+* { box-sizing: border-box; }
 
-html, body {
-  height: 100%;
-}
+html, body { height: 100%; }
 
 body {
   margin: 8px 8px 0 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: "Union", system-ui, -apple-system, sans-serif;
+  font-family: "Union", sans-serif;
   line-height: 1.55;
-  font-size: 16px;
+  font-size: 15px;
 }
 
-/* === Sidebar fissa === */
+/* === Sidebar === */
 .sidebar {
   position: fixed;
   inset: 0 auto 0 0;
@@ -71,58 +67,48 @@ body {
   background: var(--bg);
 }
 
-/* Nome artista */
 .brand {
   font-weight: 600;
   font-size: 24px;
-  line-height: 1.2;
+  line-height: 1.15;
   text-decoration: none;
   color: inherit;
-  display: block;
-  margin: 0 0 12px;
-  padding: 0 8px;
+  margin-bottom: 14px;
 }
 
-/* Menu principale */
 .nav {
   border-top: 1px solid var(--border);
   padding-top: 6px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 
 .nav a {
-  display: block;
   text-decoration: none;
   color: var(--fg);
-  padding: 8px 0;
-  font-size: 15px;
-  transition: color 0.2s ease;
+  padding: 6px 0;
+  font-size: 14px;
+  transition: color .25s ease;
 }
 
-.nav a:hover {
-  color: var(--muted);
-}
+.nav a:hover { color: var(--muted); }
 
-/* Lingue + footer */
 .lang {
-  display: flex;
-  justify-content: space-between;
   margin-top: auto;
   border-top: 1px solid var(--border);
   padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .lang a {
-  color: var(--muted);
   text-decoration: none;
   font-size: 14px;
+  color: var(--muted);
 }
 
-.lang a.active {
-  color: var(--fg);
-}
+.lang a.active { color: var(--fg); }
 
 /* Footer */
 .site-footer {
@@ -133,7 +119,7 @@ body {
   border-top: 1px solid var(--border);
 }
 
-/* === Area contenuto === */
+/* === Contenuto === */
 .content {
   margin-left: calc(var(--sidebar-w) + 8px);
   min-height: 100vh;
@@ -141,33 +127,36 @@ body {
 
 .wrap {
   max-width: 1200px;
-  padding: 50px 40px 30px 36px;
+  padding: 40px 40px 40px 36px;
   margin: 0 auto;
 }
 
 /* === Titoli di pagina === */
 .page-title {
   font-size: 22px;
-  margin: 10px 0 20px;
+  margin-bottom: 20px;
   font-weight: 600;
 }
 
-/* === Opere: griglia === */
+/* === Griglia opere — STILE GALLERIA === */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 28px;
-  justify-items: center;
+  gap: 34px;
+  justify-items: start;
 }
 
 .card {
+  width: 100%;
+  max-width: 340px;
   text-align: left;
   cursor: pointer;
-  transition: opacity 0.3s ease;
+  transition: opacity .2s ease, transform .2s ease;
 }
 
 .card:hover {
-  opacity: 0.9;
+  opacity: .95;
+  transform: translateY(-2px);
 }
 
 .card img {
@@ -176,47 +165,48 @@ body {
   object-fit: contain;
   display: block;
   background: #fff;
+  margin-bottom: 6px;
 }
 
+/* === Didascalie in stile MUSEO === */
 .card figcaption {
-  margin-top: 6px;                 
-  line-height: 1.25;                
+  margin-top: 0;
+  line-height: 1.3;
 }
 
 .card figcaption strong {
-  font-size: 16px;                  
+  font-size: 16px;
   font-weight: 600;
   display: block;
-  margin-bottom: 2px;               
+  margin-bottom: 2px;     /* MOLTO VICINO alle dimensioni */
 }
 
 .card figcaption .meta {
-  font-size: 13px;                  
-  font-style: italic;               
-  color: #666;                    
-  letter-spacing: 0.1px;
+  font-size: 12.5px;
+  font-style: italic;
+  color: #666;
+  display: block;
+  letter-spacing: .03em;
 }
 
-}
-
-/* === Lightbox per immagini === */
+/* === Lightbox === */
 .lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(255,255,255,0.97);
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  z-index: 999;
-  visibility: hidden;
+  justify-content: center;
+  align-items: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  visibility: hidden;
+  transition: opacity .25s ease;
+  z-index: 999;
 }
 
 .lightbox.open {
-  visibility: visible;
   opacity: 1;
+  visibility: visible;
 }
 
 .lightbox img {
@@ -224,81 +214,71 @@ body {
   max-height: 80vh;
   object-fit: contain;
   margin-bottom: 12px;
-  box-shadow: 0 0 24px rgba(0, 0, 0, 0.1);
 }
 
 .lightbox figcaption {
-  font-size: 0.9rem;
+  font-size: 14px;
   text-align: center;
   color: #444;
 }
 
+/* Frecce minimal */
 .lightbox .nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
+  font-size: 26px;
   color: #333;
-  font-size: 1.5rem;
   cursor: pointer;
-  padding: 6px 12px;
-  transition: color 0.2s ease;
+  transition: opacity .2s ease;
 }
 
-.lightbox .prev { left: 20px; }
-.lightbox .next { right: 20px; }
+.lightbox .prev { left: 24px; }
+.lightbox .next { right: 24px; }
 
-.lightbox .nav-btn:hover {
-  color: #d00;
-}
+.lightbox .nav-btn:hover { opacity: .4; }
 
-/* === Prosa / Info === */
+/* === INFO / PROSE === */
 .prose {
   max-width: 70ch;
   line-height: 1.65;
-  font-size: 0.95rem;
+  font-size: 15px;
 }
 
 .prose h3 {
-  font-size: 1.1rem;
-  margin-top: 20px;
+  margin-top: 26px;
   font-weight: 600;
+  font-size: 16px;
 }
 
-.prose a {
-  color: inherit;
-  text-decoration: underline;
-}
+.prose a { text-decoration: underline; color: inherit; }
 
-/* === Responsive === */
+/* === Mobile === */
 @media (max-width: 860px) {
-  :root {
-    --sidebar-w: 0px;
-  }
+
+  :root { --sidebar-w: 0px; }
+
+  body { margin: 0; }
 
   .sidebar {
     position: static;
     width: 100%;
-    border-right: 0;
     border-bottom: 1px solid var(--border);
   }
 
   .brand {
     font-size: 22px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .nav a {
     font-size: 14px;
-    padding: 6px 0;
+    padding: 5px 0;
   }
 
-  .content {
-    margin-left: 0;
-  }
+  .content { margin-left: 0; }
 
-  .wrap {
-    padding: 30px 18px;
-  }
+  .wrap { padding: 26px 18px; }
 }
