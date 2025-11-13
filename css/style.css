@@ -179,18 +179,24 @@ body {
 }
 
 .card figcaption {
-  margin-top: 6px;
-  font-size: 0.95rem;
+  margin-top: 6px;                 
+  line-height: 1.25;                
 }
 
 .card figcaption strong {
+  font-size: 16px;                  
   font-weight: 600;
   display: block;
+  margin-bottom: 2px;               
 }
 
-.card figcaption span {
-  font-size: 0.85rem;
-  color: #555;
+.card figcaption .meta {
+  font-size: 13px;                  
+  font-style: italic;               
+  color: #666;                    
+  letter-spacing: 0.1px;
+}
+
 }
 
 /* === Lightbox per immagini === */
