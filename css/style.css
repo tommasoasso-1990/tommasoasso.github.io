@@ -81,30 +81,27 @@ body {
 
 .brand {
   font-weight: 700;
-  font-size: 26px;
-  line-height: 1.1;
+  font-size: 24px;
+  line-height: 1.05;
   text-decoration: none;
   color: var(--fg);
-}
-
-.nav {
-  border-top: 1px solid var(--border);
-  padding-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .nav a {
   text-decoration: none;
   color: var(--fg);
-  font-size: 15px;
-  padding: 4px 0;
-  transition: opacity .2s ease;
+  font-size: 12px;
+  padding: 3px 0;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: opacity .2s ease, color .2s ease;
 }
 
 .nav a:hover {
-  opacity: .6;
+  opacity: .7;
+  color: var(--accent);
 }
 
 .lang {
