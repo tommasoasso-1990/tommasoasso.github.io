@@ -4,14 +4,25 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Works — Tommaso Asso</title>
+  <meta name="description" content="Portfolio of Tommaso Asso, contemporary artist. Explore paintings and visual art works.">
+  <meta property="og:title" content="Works — Tommaso Asso">
+  <meta property="og:description" content="Portfolio of contemporary artist Tommaso Asso.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎨</text></svg>">
+  <link rel="alternate" hreflang="it" href="https://tommasoasso.github.io/" />
+  <link rel="alternate" hreflang="en" href="https://tommasoasso.github.io/en/" />
   <link rel="stylesheet" href="../css/style.css">
+  
+  <!-- Preload critical images for faster loading -->
+  <link rel="preload" as="image" href="../images/2024-80x100.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="../images/città-blu-90x70.jpg" fetchpriority="high">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
   <aside class="sidebar">
     <a class="brand" href="index.html">Tommaso<br>Asso</a>
     <nav class="nav">
-      <a href="index.html">Works</a>
+      <a href="index.html" class="active" aria-current="page">Works</a>
       <a href="exhibitions.html">Exhibitions</a>
       <a href="info.html">Info</a>
     </nav>
@@ -22,7 +33,7 @@
     <div class="site-footer">© <span id="year-en"></span> Tommaso Asso</div>
   </aside>
 
-  <main class="content">
+  <main class="content" id="main-content">
     <div class="wrap">
       <h1 class="page-title">Works</h1>
 
@@ -31,11 +42,12 @@
     </div>
   </main>
 
-  <figure class="lightbox" id="lb" aria-hidden="true">
-    <button class="nav-btn prev" aria-label="Previous">←</button>
+  <figure class="lightbox" id="lb" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Artwork viewer">
+    <button class="nav-btn prev" aria-label="Previous artwork">←</button>
     <img alt="">
     <figcaption></figcaption>
-    <button class="nav-btn next" aria-label="Next">→</button>
+    <button class="nav-btn next" aria-label="Next artwork">→</button>
+    <button class="lightbox-close" aria-label="Close viewer">&times;</button>
   </figure>
 
   <script src="../js/works.js"></script>

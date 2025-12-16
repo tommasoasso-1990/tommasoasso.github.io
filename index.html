@@ -4,14 +4,53 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Opere — Tommaso Asso</title>
+  <meta name="description" content="Portfolio di Tommaso Asso, artista contemporaneo. Esplora le opere di pittura e arte visiva.">
+  <meta name="author" content="Tommaso Asso">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Opere — Tommaso Asso">
+  <meta property="og:description" content="Portfolio di Tommaso Asso, artista contemporaneo.">
+  <meta property="og:url" content="https://tommasoasso.github.io/">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎨</text></svg>">
+  
+  <!-- Language alternates -->
+  <link rel="alternate" hreflang="it" href="https://tommasoasso.github.io/" />
+  <link rel="alternate" hreflang="en" href="https://tommasoasso.github.io/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://tommasoasso.github.io/" />
+  
   <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Preload critical images for faster loading -->
+  <link rel="preload" as="image" href="images/2024-80x100.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="images/città-blu-90x70.jpg" fetchpriority="high">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Tommaso Asso",
+    "jobTitle": "Artist",
+    "url": "https://tommasoasso.github.io",
+    "email": "tommasoasso@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Firenze",
+      "addressCountry": "IT"
+    }
+  }
+  </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Salta al contenuto</a>
 
   <aside class="sidebar">
     <a class="brand" href="index.html">Tommaso<br>Asso</a>
     <nav class="nav">
-      <a href="index.html">Opere</a>
+      <a href="index.html" class="active" aria-current="page">Opere</a>
       <a href="mostre.html">Mostre</a>
       <a href="info.html">Info</a>
     </nav>
@@ -22,7 +61,7 @@
     <div class="site-footer">© <span id="year-it"></span> Tommaso Asso</div>
   </aside>
 
-  <main class="content">
+  <main class="content" id="main-content">
     <div class="wrap">
       <h1 class="page-title">Opere</h1>
 
@@ -32,11 +71,12 @@
   </main>
 
   <!-- lightbox condiviso -->
-  <figure class="lightbox" id="lb" aria-hidden="true">
-    <button class="nav-btn prev" aria-label="Precedente">←</button>
+  <figure class="lightbox" id="lb" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Visualizzazione opera">
+    <button class="nav-btn prev" aria-label="Opera precedente">←</button>
     <img alt="">
     <figcaption></figcaption>
-    <button class="nav-btn next" aria-label="Successiva">→</button>
+    <button class="nav-btn next" aria-label="Opera successiva">→</button>
+    <button class="lightbox-close" aria-label="Chiudi visualizzazione">&times;</button>
   </figure>
 
   <script src="js/works.js"></script>

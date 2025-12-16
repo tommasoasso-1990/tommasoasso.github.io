@@ -28,11 +28,20 @@ function renderWorks(options) {
   if (!grid) return;
 
   // genera le card
-  WORKS.forEach(work => {
+  WORKS.forEach((work, index) => {
     const fig = document.createElement("figure");
     fig.className = "card";
+    
+    // Prioritize first 4 images for faster loading
+    const fetchPriority = index < 4 ? 'high' : 'auto';
+    const loading = index < 4 ? 'eager' : 'lazy';
+    
     fig.innerHTML = `
-      <img src="${imgPrefix}images/${work.file}" alt="${work.title} — ${work.meta}">
+      <img src="${imgPrefix}images/${work.file}" 
+           alt="${work.title} — ${work.meta}"
+           loading="${loading}"
+           decoding="async"
+           fetchpriority="${fetchPriority}">
       <figcaption>
         <strong>${work.title}</strong>
         <span class="meta">${work.meta}</span>
@@ -49,6 +58,7 @@ function renderWorks(options) {
   const cap = lb.querySelector("figcaption");
   const prev = lb.querySelector(".prev");
   const next = lb.querySelector(".next");
+  const closeBtn = lb.querySelector(".lightbox-close");
 
   const cards = Array.from(grid.querySelectorAll(".card"));
   const items = cards.map(c => ({
@@ -57,36 +67,69 @@ function renderWorks(options) {
   }));
 
   let i = 0;
+
   function renderLB() {
     big.src = items[i].src;
+    big.alt = cap.textContent = "";
     cap.innerHTML = items[i].captionHTML;
+    
+    // Update image counter for screen readers
+    big.alt = `Artwork ${i + 1} of ${items.length}`;
   }
+
   function open(n) {
     i = n;
     renderLB();
     lb.classList.add("open");
+    lb.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    
+    // Focus close button for keyboard users
+    setTimeout(() => closeBtn && closeBtn.focus(), 100);
   }
+
   function close() {
     lb.classList.remove("open");
+    lb.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
   }
+
   function nextI() {
     i = (i + 1) % items.length;
     renderLB();
   }
+
   function prevI() {
     i = (i - 1 + items.length) % items.length;
     renderLB();
   }
 
-  cards.forEach((c, idx) =>
-    c.querySelector("img").addEventListener("click", () => open(idx))
-  );
+  // Make cards keyboard accessible
+  cards.forEach((c, idx) => {
+    const img = c.querySelector("img");
+    img.setAttribute("tabindex", "0");
+    img.setAttribute("role", "button");
+    
+    img.addEventListener("click", () => open(idx));
+    img.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        open(idx);
+      }
+    });
+  });
 
   lb.addEventListener("click", e => {
     if (e.target === lb) close();
   });
+  
+  if (closeBtn) {
+    closeBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      close();
+    });
+  }
+
   next.addEventListener("click", e => {
     e.stopPropagation();
     nextI();
