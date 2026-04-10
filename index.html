@@ -1,55 +1,445 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Opere — Tommaso Asso</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Opere — Tommaso Asso</title>
+<style>
+@font-face {
+  font-family: "Union";
+  src: url("fonts/Union-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Union";
+  src: url("fonts/Union-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Union";
+  src: url("fonts/Union-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #0d0d0d;
+  --white: #f7f7f5;
+  --border: rgba(13,13,13,0.1);
+  --sidebar-w: 220px;
+}
+
+html, body {
+  height: 100%;
+  background: var(--white);
+  color: var(--black);
+  font-family: "Union", system-ui, sans-serif;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 44px 36px 36px;
+  border-right: 1px solid var(--border);
+  background: var(--white);
+  z-index: 10;
+}
+
+.brand {
+  display: block;
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  margin-bottom: 56px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.nav a {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  padding: 7px 0;
+  opacity: 0.35;
+  border-bottom: 1px solid transparent;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.nav a:hover,
+.nav a.active { opacity: 1; border-bottom-color: var(--black); }
+
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lang {
+  display: flex;
+  gap: 14px;
+}
+.lang a {
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+}
+.lang a.active, .lang a:hover { opacity: 1; }
+
+.site-footer {
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  opacity: 0.25;
+}
+
+/* ── MAIN ── */
+.content {
+  margin-left: var(--sidebar-w);
+  min-height: 100vh;
+  padding: 44px 52px 80px;
+}
+
+.page-title {
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.38;
+  margin-bottom: 44px;
+}
+
+/* ── MASONRY-LIKE GRID ── */
+/* 3 colonne, ogni immagine mantiene le proporzioni reali */
+.grid {
+  columns: 3;
+  column-gap: 3px;
+}
+
+.card {
+  break-inside: avoid;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 3px;
+  background: #d8d8d4;
+}
+
+.card img {
+  width: 100%;
+  height: auto;          /* proporzioni reali */
+  display: block;
+  transition: transform 0.6s cubic-bezier(.25,.46,.45,.94);
+}
+
+.card:hover img { transform: scale(1.03); }
+
+.card figcaption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(13,13,13,0.8) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+.card:hover figcaption { opacity: 1; }
+
+.card figcaption strong {
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--white);
+  display: block;
+  line-height: 1.2;
+}
+
+.card figcaption .meta {
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  color: rgba(247,247,245,0.55);
+  margin-top: 3px;
+}
+
+/* placeholder */
+.card-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: #c8c8c4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-placeholder span {
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  opacity: 0.4;
+}
+
+/* ── LIGHTBOX ── */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13,13,13,0.97);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.open { display: flex; }
+
+.lightbox img {
+  max-width: min(84vw, 1000px);
+  max-height: 82vh;
+  object-fit: contain;
+  display: block;
+}
+
+.lightbox figcaption {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+}
+.lightbox figcaption strong {
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  display: block;
+}
+.lightbox figcaption .meta {
+  font-style: italic;
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  color: rgba(247,247,245,0.38);
+  margin-top: 4px;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(247,247,245,0.28);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 20px;
+  transition: color 0.2s;
+  line-height: 1;
+}
+.nav-btn:hover { color: var(--white); }
+.nav-btn.prev { left: 20px; }
+.nav-btn.next { right: 20px; }
+
+.lb-close {
+  position: absolute;
+  top: 28px;
+  right: 32px;
+  background: none;
+  border: none;
+  color: rgba(247,247,245,0.28);
+  font-family: "Union", sans-serif;
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.lb-close:hover { color: var(--white); }
+
+.lb-counter {
+  position: absolute;
+  top: 28px;
+  left: 32px;
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
+  color: rgba(247,247,245,0.22);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .grid { columns: 2; }
+}
+
+@media (max-width: 620px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 18px 20px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand { margin-bottom: 0; font-size: 0.95rem; flex: 1; }
+  .nav { flex-direction: row; flex: none; gap: 0; }
+  .nav a { padding: 6px 10px; }
+  .sidebar-bottom { flex-direction: row; gap: 16px; align-items: center; }
+  .site-footer { display: none; }
+  .content { margin-left: 0; padding: 24px 12px 60px; }
+  .grid { columns: 2; column-gap: 2px; }
+  .card { margin-bottom: 2px; }
+  .nav-btn.prev { left: 6px; }
+  .nav-btn.next { right: 6px; }
+}
+</style>
 </head>
 <body>
 
-  <aside class="sidebar">
-    <a class="brand" href="index.html">Tommaso<br>Asso</a>
-    <nav class="nav">
-      <a href="index.html">Opere</a>
-      <a href="mostre.html">Mostre</a>
-      <a href="info.html">Info</a>
-    </nav>
+<aside class="sidebar">
+  <a class="brand" href="index.html">Tommaso<br>Asso</a>
+  <nav class="nav">
+    <a href="index.html" class="active">Opere</a>
+    <a href="mostre.html">Mostre</a>
+    <a href="info.html">Info</a>
+  </nav>
+  <div class="sidebar-bottom">
     <div class="lang">
       <a class="active" href="index.html">IT</a>
       <a href="en/index.html">EN</a>
     </div>
-    <div class="site-footer">© <span id="year-it"></span> Tommaso Asso</div>
-  </aside>
+    <div class="site-footer">© <span id="year"></span> Tommaso Asso</div>
+  </div>
+</aside>
 
-  <main class="content">
-    <div class="wrap">
-      <h1 class="page-title">Opere</h1>
+<main class="content">
+  <h1 class="page-title">Opere</h1>
+  <section class="grid" id="works-grid"></section>
+</main>
 
-      <!-- griglia generata via JS -->
-      <section class="grid" id="works-grid"></section>
-    </div>
-  </main>
+<figure class="lightbox" id="lb" aria-hidden="true">
+  <span class="lb-counter" id="lb-counter"></span>
+  <button class="lb-close" id="lb-close">Chiudi · esc</button>
+  <button class="nav-btn prev" aria-label="Precedente">←</button>
+  <img alt="">
+  <figcaption></figcaption>
+  <button class="nav-btn next" aria-label="Successiva">→</button>
+</figure>
 
-  <!-- lightbox condiviso -->
-  <figure class="lightbox" id="lb" aria-hidden="true">
-    <button class="nav-btn prev" aria-label="Precedente">←</button>
-    <img alt="">
-    <figcaption></figcaption>
-    <button class="nav-btn next" aria-label="Successiva">→</button>
-  </figure>
+<script src="js/works.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
 
-  <script src="js/works.js"></script>
-  <script>
-    // anno footer
-    document.getElementById('year-it').textContent = new Date().getFullYear();
+const grid = document.getElementById('works-grid');
 
-    // genera griglia + lightbox (IT: immagini nella stessa cartella)
-    renderWorks({
-      gridId: "works-grid",
-      lightboxId: "lb",
-      imgPrefix: ""        // perché index.html è nella root accanto a /images
-    });
-  </script>
+WORKS.forEach((work, idx) => {
+  const fig = document.createElement('figure');
+  fig.className = 'card';
+
+  const img = document.createElement('img');
+  img.alt = `${work.title} — ${work.meta}`;
+  img.src = `images/${work.file}`;
+  img.loading = 'lazy';
+  img.onerror = function() {
+    this.style.display = 'none';
+    const ph = document.createElement('div');
+    ph.className = 'card-placeholder';
+    ph.innerHTML = `<span>${work.title}</span>`;
+    fig.insertBefore(ph, fig.firstChild);
+  };
+
+  const cap = document.createElement('figcaption');
+  cap.innerHTML = `<strong>${work.title}</strong><span class="meta">${work.meta}</span>`;
+
+  fig.appendChild(img);
+  fig.appendChild(cap);
+  grid.appendChild(fig);
+});
+
+// lightbox
+const lb      = document.getElementById('lb');
+const lbImg   = lb.querySelector('img');
+const lbCap   = lb.querySelector('figcaption');
+const lbCount = document.getElementById('lb-counter');
+let current   = 0;
+
+function openLB(idx) {
+  current = idx;
+  const w = WORKS[idx];
+  lbImg.src = `images/${w.file}`;
+  lbImg.alt = w.title;
+  lbCap.innerHTML = `<strong>${w.title}</strong><span class="meta">${w.meta}</span>`;
+  lbCount.textContent = `${idx + 1} / ${WORKS.length}`;
+  lb.classList.add('open');
+  lb.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLB() {
+  lb.classList.remove('open');
+  lb.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function step(dir) {
+  current = (current + dir + WORKS.length) % WORKS.length;
+  openLB(current);
+}
+
+grid.addEventListener('click', e => {
+  const card = e.target.closest('.card');
+  if (!card) return;
+  openLB(Array.from(grid.children).indexOf(card));
+});
+
+lb.querySelector('.prev').addEventListener('click', e => { e.stopPropagation(); step(-1); });
+lb.querySelector('.next').addEventListener('click', e => { e.stopPropagation(); step(+1); });
+document.getElementById('lb-close').addEventListener('click', closeLB);
+lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+
+// swipe mobile
+let touchX = null;
+lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+lb.addEventListener('touchend', e => {
+  if (touchX === null) return;
+  const diff = touchX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 40) step(diff > 0 ? 1 : -1);
+  touchX = null;
+});
+
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape')     closeLB();
+  if (e.key === 'ArrowRight') step(+1);
+  if (e.key === 'ArrowLeft')  step(-1);
+});
+</script>
 </body>
 </html>
