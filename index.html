@@ -121,7 +121,6 @@ html, body {
 .content {
   margin-left: var(--sidebar-w);
   min-height: 100vh;
-  padding: 44px 52px 80px;
 }
 
 .page-title {
@@ -131,79 +130,63 @@ html, body {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   opacity: 0.38;
-  margin-bottom: 44px;
+  padding: 44px 72px 0;
+  margin-bottom: 0;
 }
 
-/* ── MASONRY-LIKE GRID ── */
-/* 3 colonne, ogni immagine mantiene le proporzioni reali */
-.grid {
-  columns: 3;
-  column-gap: 3px;
+/* ── LISTA OPERE ── */
+.works-list {
+  padding: 60px 0 120px;
 }
 
-.card {
-  break-inside: avoid;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  margin-bottom: 3px;
-  background: #d8d8d4;
-}
-
-.card img {
-  width: 100%;
-  height: auto;          /* proporzioni reali */
-  display: block;
-  transition: transform 0.6s cubic-bezier(.25,.46,.45,.94);
-}
-
-.card:hover img { transform: scale(1.03); }
-
-.card figcaption {
-  position: absolute;
-  inset: 0;
+.work-item {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 16px;
-  background: linear-gradient(to top, rgba(13,13,13,0.8) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.28s ease;
+  align-items: center;
+  padding: 60px 72px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
 }
-.card:hover figcaption { opacity: 1; }
 
-.card figcaption strong {
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--white);
+.work-item:last-child {
+  border-bottom: none;
+}
+
+.work-item:hover .work-img {
+  opacity: 0.92;
+}
+
+.work-img {
+  max-width: 680px;
+  width: 100%;
+  height: auto;
   display: block;
-  line-height: 1.2;
+  transition: opacity 0.3s ease;
 }
 
-.card figcaption .meta {
+.work-caption {
+  margin-top: 20px;
+  text-align: left;
+  width: 100%;
+  max-width: 680px;
+}
+
+.work-caption strong {
+  display: block;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.work-caption .meta {
+  display: block;
   font-weight: 400;
   font-style: italic;
-  font-size: 0.56rem;
-  letter-spacing: 0.1em;
-  color: rgba(247,247,245,0.55);
-  margin-top: 3px;
-}
-
-/* placeholder */
-.card-placeholder {
-  width: 100%;
-  aspect-ratio: 4/3;
-  background: #c8c8c4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.card-placeholder span {
-  font-size: 0.5rem;
-  letter-spacing: 0.1em;
-  opacity: 0.4;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  opacity: 0.45;
+  margin-top: 4px;
 }
 
 /* ── LIGHTBOX ── */
@@ -219,10 +202,11 @@ html, body {
 .lightbox.open { display: flex; }
 
 .lightbox img {
-  max-width: min(84vw, 1000px);
-  max-height: 82vh;
+  max-width: min(88vw, 1100px);
+  max-height: 84vh;
   object-fit: contain;
   display: block;
+  cursor: default;
 }
 
 .lightbox figcaption {
@@ -258,13 +242,19 @@ html, body {
   color: rgba(247,247,245,0.28);
   font-size: 1.4rem;
   cursor: pointer;
-  padding: 20px;
+  padding: 24px;
   transition: color 0.2s;
   line-height: 1;
+  /* area tap più grande su mobile */
+  min-width: 60px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .nav-btn:hover { color: var(--white); }
-.nav-btn.prev { left: 20px; }
-.nav-btn.next { right: 20px; }
+.nav-btn.prev { left: 12px; }
+.nav-btn.next { right: 12px; }
 
 .lb-close {
   position: absolute;
@@ -279,6 +269,7 @@ html, body {
   text-transform: uppercase;
   cursor: pointer;
   transition: color 0.2s;
+  padding: 8px;
 }
 .lb-close:hover { color: var(--white); }
 
@@ -293,7 +284,7 @@ html, body {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
-  .grid { columns: 2; }
+  .work-item { padding: 48px 48px; }
 }
 
 @media (max-width: 620px) {
@@ -313,11 +304,11 @@ html, body {
   .nav a { padding: 6px 10px; }
   .sidebar-bottom { flex-direction: row; gap: 16px; align-items: center; }
   .site-footer { display: none; }
-  .content { margin-left: 0; padding: 24px 12px 60px; }
-  .grid { columns: 2; column-gap: 2px; }
-  .card { margin-bottom: 2px; }
-  .nav-btn.prev { left: 6px; }
-  .nav-btn.next { right: 6px; }
+  .content { margin-left: 0; }
+  .page-title { padding: 28px 20px 0; }
+  .work-item { padding: 40px 20px; }
+  .nav-btn.prev { left: 0; }
+  .nav-btn.next { right: 0; }
 }
 </style>
 </head>
@@ -341,7 +332,7 @@ html, body {
 
 <main class="content">
   <h1 class="page-title">Opere</h1>
-  <section class="grid" id="works-grid"></section>
+  <div class="works-list" id="works-list"></div>
 </main>
 
 <figure class="lightbox" id="lb" aria-hidden="true">
@@ -357,39 +348,35 @@ html, body {
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-const grid = document.getElementById('works-grid');
-
-WORKS.forEach((work, idx) => {
-  const fig = document.createElement('figure');
-  fig.className = 'card';
-
-  const img = document.createElement('img');
-  img.alt = `${work.title} — ${work.meta}`;
-  img.src = `images/${work.file}`;
-  img.loading = 'lazy';
-  img.onerror = function() {
-    this.style.display = 'none';
-    const ph = document.createElement('div');
-    ph.className = 'card-placeholder';
-    ph.innerHTML = `<span>${work.title}</span>`;
-    fig.insertBefore(ph, fig.firstChild);
-  };
-
-  const cap = document.createElement('figcaption');
-  cap.innerHTML = `<strong>${work.title}</strong><span class="meta">${work.meta}</span>`;
-
-  fig.appendChild(img);
-  fig.appendChild(cap);
-  grid.appendChild(fig);
-});
-
-// lightbox
+const list    = document.getElementById('works-list');
 const lb      = document.getElementById('lb');
 const lbImg   = lb.querySelector('img');
 const lbCap   = lb.querySelector('figcaption');
 const lbCount = document.getElementById('lb-counter');
 let current   = 0;
 
+// genera lista opere
+WORKS.forEach((work, idx) => {
+  const item = document.createElement('div');
+  item.className = 'work-item';
+
+  const img = document.createElement('img');
+  img.className = 'work-img';
+  img.alt = `${work.title} — ${work.meta}`;
+  img.src = `images/${work.file}`;
+  img.loading = 'lazy';
+
+  const cap = document.createElement('div');
+  cap.className = 'work-caption';
+  cap.innerHTML = `<strong>${work.title}</strong><span class="meta">${work.meta}</span>`;
+
+  item.appendChild(img);
+  item.appendChild(cap);
+  item.addEventListener('click', () => openLB(idx));
+  list.appendChild(item);
+});
+
+// lightbox
 function openLB(idx) {
   current = idx;
   const w = WORKS[idx];
@@ -413,25 +400,30 @@ function step(dir) {
   openLB(current);
 }
 
-grid.addEventListener('click', e => {
-  const card = e.target.closest('.card');
-  if (!card) return;
-  openLB(Array.from(grid.children).indexOf(card));
-});
-
 lb.querySelector('.prev').addEventListener('click', e => { e.stopPropagation(); step(-1); });
 lb.querySelector('.next').addEventListener('click', e => { e.stopPropagation(); step(+1); });
 document.getElementById('lb-close').addEventListener('click', closeLB);
 lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
 
-// swipe mobile
-let touchX = null;
-lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+// swipe mobile — soglia più alta per non confondersi col tap
+let touchStartX = null;
+let touchStartY = null;
+
+lb.addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
 lb.addEventListener('touchend', e => {
-  if (touchX === null) return;
-  const diff = touchX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 40) step(diff > 0 ? 1 : -1);
-  touchX = null;
+  if (touchStartX === null) return;
+  const dx = touchStartX - e.changedTouches[0].clientX;
+  const dy = touchStartY - e.changedTouches[0].clientY;
+  // solo swipe orizzontale deciso (>60px) e più orizzontale che verticale
+  if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+    step(dx > 0 ? 1 : -1);
+  }
+  touchStartX = null;
+  touchStartY = null;
 });
 
 document.addEventListener('keydown', e => {
