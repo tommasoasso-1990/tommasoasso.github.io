@@ -30,17 +30,23 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --black: #0d0d0d;
-  --white: #f7f7f5;
-  --border: rgba(13,13,13,0.1);
-  --sidebar-w: 220px;
+  --sidebar-bg: #f0ece5;
+  --wall-bg:    #f8f8f6;
+  --black:      #0d0d0d;
+  --border:     rgba(13,13,13,0.08);
+  --sidebar-w:  220px;
 }
 
 html, body {
-  height: 100%;
-  background: var(--white);
+  background: var(--wall-bg);
   color: var(--black);
   font-family: "Union", system-ui, sans-serif;
+}
+
+/* ── MURO — texture leggera ── */
+body {
+  background-color: var(--wall-bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23f8f8f6'/%3E%3Crect width='1' height='1' fill='rgba(0,0,0,0.022)'/%3E%3C/svg%3E");
 }
 
 /* ── SIDEBAR ── */
@@ -52,8 +58,8 @@ html, body {
   display: flex;
   flex-direction: column;
   padding: 44px 36px 36px;
+  background: var(--sidebar-bg);
   border-right: 1px solid var(--border);
-  background: var(--white);
   z-index: 10;
 }
 
@@ -131,12 +137,11 @@ html, body {
   text-transform: uppercase;
   opacity: 0.38;
   padding: 44px 72px 0;
-  margin-bottom: 0;
 }
 
 /* ── LISTA OPERE ── */
 .works-list {
-  padding: 60px 0 120px;
+  padding: 80px 0 120px;
 }
 
 .work-item {
@@ -147,25 +152,29 @@ html, body {
   border-bottom: 1px solid var(--border);
   cursor: pointer;
 }
+.work-item:last-child { border-bottom: none; }
 
-.work-item:last-child {
-  border-bottom: none;
-}
-
-.work-item:hover .work-img {
-  opacity: 0.92;
-}
-
+/* ombra quadro appeso */
 .work-img {
   max-width: 680px;
   width: 100%;
   height: auto;
   display: block;
-  transition: opacity 0.3s ease;
+  box-shadow:
+    4px 10px 32px rgba(0,0,0,0.22),
+    1px 2px 6px  rgba(0,0,0,0.12);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.work-item:hover .work-img {
+  box-shadow:
+    6px 14px 44px rgba(0,0,0,0.26),
+    2px 4px 10px  rgba(0,0,0,0.14);
+  transform: translateY(-2px);
 }
 
 .work-caption {
-  margin-top: 20px;
+  margin-top: 22px;
   text-align: left;
   width: 100%;
   max-width: 680px;
@@ -185,7 +194,7 @@ html, body {
   font-style: italic;
   font-size: 0.62rem;
   letter-spacing: 0.08em;
-  opacity: 0.45;
+  opacity: 0.42;
   margin-top: 4px;
 }
 
@@ -206,7 +215,6 @@ html, body {
   max-height: 84vh;
   object-fit: contain;
   display: block;
-  cursor: default;
 }
 
 .lightbox figcaption {
@@ -222,14 +230,14 @@ html, body {
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--white);
+  color: #f8f8f6;
   display: block;
 }
 .lightbox figcaption .meta {
   font-style: italic;
   font-size: 0.56rem;
   letter-spacing: 0.1em;
-  color: rgba(247,247,245,0.38);
+  color: rgba(248,248,246,0.38);
   margin-top: 4px;
 }
 
@@ -239,20 +247,18 @@ html, body {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: rgba(247,247,245,0.28);
+  color: rgba(248,248,246,0.28);
   font-size: 1.4rem;
   cursor: pointer;
   padding: 24px;
   transition: color 0.2s;
-  line-height: 1;
-  /* area tap più grande su mobile */
   min-width: 60px;
   min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.nav-btn:hover { color: var(--white); }
+.nav-btn:hover { color: #f8f8f6; }
 .nav-btn.prev { left: 12px; }
 .nav-btn.next { right: 12px; }
 
@@ -262,7 +268,7 @@ html, body {
   right: 32px;
   background: none;
   border: none;
-  color: rgba(247,247,245,0.28);
+  color: rgba(248,248,246,0.28);
   font-family: "Union", sans-serif;
   font-size: 0.56rem;
   letter-spacing: 0.18em;
@@ -271,7 +277,7 @@ html, body {
   transition: color 0.2s;
   padding: 8px;
 }
-.lb-close:hover { color: var(--white); }
+.lb-close:hover { color: #f8f8f6; }
 
 .lb-counter {
   position: absolute;
@@ -279,7 +285,7 @@ html, body {
   left: 32px;
   font-size: 0.56rem;
   letter-spacing: 0.14em;
-  color: rgba(247,247,245,0.22);
+  color: rgba(248,248,246,0.22);
 }
 
 /* ── RESPONSIVE ── */
@@ -355,7 +361,6 @@ const lbCap   = lb.querySelector('figcaption');
 const lbCount = document.getElementById('lb-counter');
 let current   = 0;
 
-// genera lista opere
 WORKS.forEach((work, idx) => {
   const item = document.createElement('div');
   item.className = 'work-item';
@@ -376,7 +381,6 @@ WORKS.forEach((work, idx) => {
   list.appendChild(item);
 });
 
-// lightbox
 function openLB(idx) {
   current = idx;
   const w = WORKS[idx];
@@ -405,23 +409,16 @@ lb.querySelector('.next').addEventListener('click', e => { e.stopPropagation(); 
 document.getElementById('lb-close').addEventListener('click', closeLB);
 lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
 
-// swipe mobile — soglia più alta per non confondersi col tap
-let touchStartX = null;
-let touchStartY = null;
-
+let touchStartX = null, touchStartY = null;
 lb.addEventListener('touchstart', e => {
   touchStartX = e.touches[0].clientX;
   touchStartY = e.touches[0].clientY;
 }, { passive: true });
-
 lb.addEventListener('touchend', e => {
   if (touchStartX === null) return;
   const dx = touchStartX - e.changedTouches[0].clientX;
   const dy = touchStartY - e.changedTouches[0].clientY;
-  // solo swipe orizzontale deciso (>60px) e più orizzontale che verticale
-  if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-    step(dx > 0 ? 1 : -1);
-  }
+  if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx > 0 ? 1 : -1);
   touchStartX = null;
   touchStartY = null;
 });
